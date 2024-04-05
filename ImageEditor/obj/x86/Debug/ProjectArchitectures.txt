@@ -1,0 +1,1 @@
+C:\Users\piotr\source\repos\ImageEditor\ImageEditor\ImageEditor.csproj;x86

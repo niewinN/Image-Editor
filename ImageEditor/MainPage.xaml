@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="ImageEditor.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ImageEditor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Key="ButtonSelectedStyle" TargetType="Button">
+            <Setter Property="Background" Value="DarkGray"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Load Image" Click="LoadImage_Click"/>
+            <Image x:Name="imageControl" Stretch="Uniform" Height="500"/>
+            <Button x:Name="grayscaleButton" Content="Apply Grayscale Filter" Click="ApplyGrayscaleFilter_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="invertColorsButton" Content="Invert Colors" Click="InvertColors_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="applySepiaToneButton" Content="Apply Sepia Tone" Click="ApplySepiaTone_Click" Style="{StaticResource ButtonStyle}"/>
+            <Slider x:Name="contrastSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="ContrastSlider_ValueChanged" Header="Contrast Adjustment" />
+
+
+        </StackPanel>
+    </Grid>
+</Page>
