@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-04-05T00:30:59.439</Modified>
+      <Modified>2024-04-06T02:11:21.931</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\ImageEditor.exe">
       <PackagePath>entrypoint\ImageEditor.exe</PackagePath>
-      <Modified>2024-04-05T00:30:58.597</Modified>
+      <Modified>2024-04-06T02:11:21.396</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.14\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -94,15 +94,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\ImageEditor.xr.xml">
       <PackagePath>ImageEditor.xr.xml</PackagePath>
-      <Modified>2024-04-05T00:20:15.385</Modified>
+      <Modified>2024-04-06T02:11:21.310</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2024-04-05T00:30:58.501</Modified>
+      <Modified>2024-04-06T02:11:21.316</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2024-04-05T00:30:58.501</Modified>
+      <Modified>2024-04-06T02:11:21.316</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -114,7 +114,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\Core\ImageEditor.exe">
       <PackagePath>ImageEditor.exe</PackagePath>
-      <Modified>2024-04-05T00:30:59.435</Modified>
+      <Modified>2024-04-06T02:11:21.929</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

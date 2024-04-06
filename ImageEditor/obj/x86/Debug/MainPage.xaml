@@ -20,18 +20,38 @@
         </Style>
     </Page.Resources>
 
-
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:ConnectionId='2' Content="Load Image"                        />
-            <Image x:ConnectionId='3' x:Name="imageControl" Stretch="Uniform" Height="500"/>
-            <Button x:ConnectionId='4' x:Name="grayscaleButton" Content="Apply Grayscale Filter"                                    Style="{StaticResource ButtonStyle}"/>
-            <Button x:ConnectionId='5' x:Name="invertColorsButton" Content="Invert Colors"                            Style="{StaticResource ButtonStyle}"/>
-            <Button x:ConnectionId='6' x:Name="applySepiaToneButton" Content="Apply Sepia Tone"                              Style="{StaticResource ButtonStyle}"/>
-            <Slider x:ConnectionId='7' x:Name="contrastSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10"                                            Header="Contrast Adjustment" />
+        <Button x:ConnectionId='2' Content="Load"                         Margin="209,587,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button x:ConnectionId='3' Content="Save"                         Margin="372,587,0,0" VerticalAlignment="Top" Width="139"/>
+        <Border HorizontalAlignment="Left" Margin="209,173,0,0" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="1">
+            <Image x:ConnectionId='13' x:Name="imageControl" Stretch="Uniform" Height="389" Width="634" FocusVisualPrimaryBrush="{x:Null}"/>
+        </Border>
+        <Button x:ConnectionId='4' x:Name="grayscaleButton" Content="Grayscale"                                    Style="{StaticResource ButtonStyle}" Margin="872,173,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button x:ConnectionId='5' x:Name="invertColorsButton" Content="Invert Colors"                            Style="{StaticResource ButtonStyle}" Margin="1041,173,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button x:ConnectionId='6' x:Name="applySepiaToneButton" Content="Sepia"                              Style="{StaticResource ButtonStyle}" Margin="872,234,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button x:ConnectionId='7' x:Name="mirrorImageButton" Content="Mirror"                           Style="{StaticResource ButtonStyle}" Margin="1041,234,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button x:ConnectionId='8' x:Name="thresholdFilterButton" Content="Threshold"                               Style="{StaticResource ButtonStyle}" Margin="872,287,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button x:ConnectionId='9' x:Name="posterizeButton" Content="Posterize"                         Style="{StaticResource ButtonStyle}" Margin="1041,287,0,0" VerticalAlignment="Top" Width="139"/>
+        <Slider x:ConnectionId='10' x:Name="contrastSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10"                                            Header="Contrast" HorizontalAlignment="Left" Margin="872,353,0,0" VerticalAlignment="Top" Width="303" RenderTransformOrigin="0.06,0.093"/>
+        <Slider x:ConnectionId='11' x:Name="brightnessSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10"                                              Header="Brightness" HorizontalAlignment="Left" Margin="872,433,0,0" VerticalAlignment="Top" Width="303" RenderTransformOrigin="0.06,0.093"/>
+        <Slider x:ConnectionId='12' x:Name="saturationSlider" Minimum="-50" Maximum="50" Value="0" TickFrequency="5" SmallChange="1" LargeChange="10"                                              Header="Saturation" HorizontalAlignment="Left" Margin="872,507,0,0" VerticalAlignment="Top" Width="303" RenderTransformOrigin="0.06,0.093"/>
 
+        <!-- <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+            <Image x:Name="imageControl" Stretch="Uniform" Height="500"/>
+            <Button Content="Load Image" Click="LoadImage_Click"/>
+            <Button Content="Save" Click="SaveImage_Click"/>
+            <Button x:Name="grayscaleButton" Content="Apply Grayscale Filter" Click="ApplyGrayscaleFilter_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="invertColorsButton" Content="Invert Colors" Click="InvertColors_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="applySepiaToneButton" Content="Apply Sepia Tone" Click="ApplySepiaTone_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="mirrorImageButton" Content="Mirror Image" Click="MirrorImage_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="thresholdFilterButton" Content="Threshold Filter" Click="ThresholdFilter_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="posterizeButton" Content="Posterize" Click="Posterize_Click" Style="{StaticResource ButtonStyle}"/>
+            <Slider x:Name="contrastSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="ContrastSlider_ValueChanged" Header="Contrast Adjustment" />
+            <Slider x:Name="brightnessSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="BrightnessSlider_ValueChanged" Header="Brightness Adjustment"/>
+            <Slider x:Name="saturationSlider" Minimum="-50" Maximum="50" Value="0" TickFrequency="5" SmallChange="1" LargeChange="10" ValueChanged="SaturationSlider_ValueChanged" Header="Simple Saturation Adjustment"/>
 
-        </StackPanel>
+        </StackPanel> -->
     </Grid>
 </Page>
 
