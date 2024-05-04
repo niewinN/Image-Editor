@@ -10,6 +10,12 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Foundation;
+using Windows.Storage.Streams;
+using Windows.UI.Popups;
+using Windows.Media.Capture;
+using Windows.Media.MediaProperties;
+
 
 namespace ImageEditor
 {
@@ -23,6 +29,107 @@ namespace ImageEditor
         {
             this.InitializeComponent();
         }
+
+        private async void TakePhoto_Click(object sender, RoutedEventArgs e)
+        {
+            var cameraCaptureUI = new Windows.Media.Capture.CameraCaptureUI();
+            cameraCaptureUI.PhotoSettings.Format = Windows.Media.Capture.CameraCaptureUIPhotoFormat.Jpeg;
+            cameraCaptureUI.PhotoSettings.AllowCropping = true;
+            cameraCaptureUI.PhotoSettings.CroppedSizeInPixels = new Size(640, 480);
+
+            StorageFile photo = await cameraCaptureUI.CaptureFileAsync(Windows.Media.Capture.CameraCaptureUIMode.Photo);
+            if (photo != null)
+            {
+                // Zapisz zdjęcie do lokalizacji lokalnej aplikacji
+                StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+                StorageFile savedFile = await photo.CopyAsync(localFolder, photo.Name, NameCollisionOption.GenerateUniqueName);
+               
+                
+            }
+            else
+            {
+                // Informacja, jeśli zdjęcie nie zostało zrobione
+                MessageDialog messageDialog = new MessageDialog("Nie udało się zrobić zdjęcia.", "Błąd");
+                await messageDialog.ShowAsync();
+            }
+        }
+
+        private async void RecordVideo_Click(object sender, RoutedEventArgs e)
+        {
+            var mediaCapture = new Windows.Media.Capture.MediaCapture();
+            await mediaCapture.InitializeAsync(new MediaCaptureInitializationSettings
+            {
+                StreamingCaptureMode = StreamingCaptureMode.AudioAndVideo
+            });
+
+            // Utwórz tymczasowy plik w folderze tymczasowym
+            var tempFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("tempVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+            await mediaCapture.StartRecordToStorageFileAsync(MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto), tempFile);
+
+            var messageDialog = new MessageDialog("Recording started. Press OK to stop.");
+            await messageDialog.ShowAsync();
+
+            await mediaCapture.StopRecordAsync();
+
+            // Po zatrzymaniu nagrywania, zapytaj użytkownika, gdzie chce zapisać plik
+            var savePicker = new Windows.Storage.Pickers.FileSavePicker
+            {
+                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.VideosLibrary
+            };
+            savePicker.FileTypeChoices.Add("MP4 Video", new List<string>() { ".mp4" });
+            savePicker.SuggestedFileName = "RecordedVideo";
+
+            var file = await savePicker.PickSaveFileAsync();
+            if (file != null)
+            {
+                await tempFile.MoveAndReplaceAsync(file);
+            }
+            else
+            {
+                await tempFile.DeleteAsync(); // Usuń tymczasowy plik, jeśli użytkownik anuluje zapis
+            }
+        }
+
+
+        private async void RecordAudio_Click(object sender, RoutedEventArgs e)
+        {
+            var mediaCapture = new Windows.Media.Capture.MediaCapture();
+            await mediaCapture.InitializeAsync(new MediaCaptureInitializationSettings
+            {
+                StreamingCaptureMode = StreamingCaptureMode.Audio
+            });
+
+            var tempFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("tempAudio.mp3", CreationCollisionOption.GenerateUniqueName);
+            await mediaCapture.StartRecordToStorageFileAsync(MediaEncodingProfile.CreateMp3(AudioEncodingQuality.Auto), tempFile);
+
+            var messageDialog = new MessageDialog("Recording started. Press OK to stop.");
+            await messageDialog.ShowAsync();
+
+            await mediaCapture.StopRecordAsync();
+
+            var savePicker = new Windows.Storage.Pickers.FileSavePicker
+            {
+                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.MusicLibrary
+            };
+            savePicker.FileTypeChoices.Add("MP3 Audio", new List<string>() { ".mp3" });
+            savePicker.SuggestedFileName = "RecordedAudio";
+
+            var file = await savePicker.PickSaveFileAsync();
+            if (file != null)
+            {
+                await tempFile.MoveAndReplaceAsync(file);
+                
+            }
+            else
+            {
+                await tempFile.DeleteAsync(); // Usuń tymczasowy plik, jeśli użytkownik anuluje zapis
+            }
+        }
+
+
+
+
+
 
         private async void LoadImage_Click(object sender, RoutedEventArgs e)
         {
@@ -40,12 +147,13 @@ namespace ImageEditor
             {
                 using (var stream = await file.OpenAsync(FileAccessMode.Read))
                 {
-                    WriteableBitmap writeableBitmap = new WriteableBitmap(1, 1);
+                    BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+                    var writeableBitmap = new WriteableBitmap((int)decoder.PixelWidth, (int)decoder.PixelHeight);
                     await writeableBitmap.SetSourceAsync(stream);
                     imageControl.Source = writeableBitmap;
-                    // Zapisz oryginalny obraz
                     originalImage = writeableBitmap;
                 }
+
             }
         }
 
@@ -58,27 +166,24 @@ namespace ImageEditor
         currentFilterButton.Style = (Style)this.Resources["ButtonStyle"];
     }
 
-    // Check if the clicked button is being selected or deselected
     if (button.Tag == null || (bool)button.Tag == false)
     {
         if (originalImage != null)
         {
-            // Apply the new filter and update the UI
             WriteableBitmap modifiedImage = new WriteableBitmap(originalImage.PixelWidth, originalImage.PixelHeight);
             applyFilterAction(modifiedImage);
 
             button.Tag = true;
             button.Style = (Style)this.Resources["ButtonSelectedStyle"];
-            currentFilterButton = button; // Update the currently selected button
+            currentFilterButton = button;
         }
     }
     else
     {
-        // Reset to original image and UI if the same button was clicked again
         imageControl.Source = originalImage;
         button.Tag = false;
         button.Style = (Style)this.Resources["ButtonStyle"];
-        currentFilterButton = null; // No filter is currently selected
+        currentFilterButton = null; 
     }
 }
 
@@ -156,7 +261,7 @@ namespace ImageEditor
 
                     for (int i = 0; i < pixels.Length; i += 4)
                     {
-                        for (int j = 0; j < 3; j++) // Apply for each RGB component
+                        for (int j = 0; j < 3; j++) 
                         {
                             double pixel = pixels[i + j] / 255.0;
                             pixel -= 0.5;
@@ -219,6 +324,13 @@ namespace ImageEditor
 
         private void MirrorImage_Click(object sender, RoutedEventArgs e)
         {
+            if (originalImage == null || originalImage.PixelWidth == 0 || originalImage.PixelHeight == 0)
+            {
+                MessageDialog messageDialog = new MessageDialog("Image not loaded or is invalid.", "Error");
+                messageDialog.ShowAsync();
+                return;
+            }
+
             ToggleFilter(mirrorImageButton, modifiedImage =>
             {
                 int width = modifiedImage.PixelWidth;
@@ -242,6 +354,8 @@ namespace ImageEditor
                 }, modifiedImage);
             });
         }
+
+
 
         private void ThresholdFilter_Click(object sender, RoutedEventArgs e)
         {
@@ -321,6 +435,15 @@ namespace ImageEditor
                 }
             }
         }
+
+        
+
+
+
+
+
+
+
 
 
 

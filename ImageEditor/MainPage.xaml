@@ -7,11 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#AEADAD">
 
     <Page.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="#428bca"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style x:Key="ButtonSelectedStyle" TargetType="Button">
@@ -19,10 +19,16 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Page.Resources>
+    
 
     <Grid>
-        <Button Content="Load" Click="LoadImage_Click" Margin="209,587,0,0" VerticalAlignment="Top" Width="139"/>
-        <Button Content="Save" Click="SaveImage_Click" Margin="372,587,0,0" VerticalAlignment="Top" Width="139"/>
+        <Button Content="Load" Click="LoadImage_Click" Margin="209,587,0,0" VerticalAlignment="Top" Width="139" Background="#428bca"/>
+        <Button Content="Take Photo" Click="TakePhoto_Click" Margin="543,587,0,0" VerticalAlignment="Top" Width="139" Background="#428bca"/>
+        <Button Content="Save" Click="SaveImage_Click" Margin="372,587,0,0" VerticalAlignment="Top" Width="139" Background="#428bca"/>
+        <Button Content="Record Video" Click="RecordVideo_Click" Margin="710,587,0,0" VerticalAlignment="Top" Width="139" Background="#428bca"/>
+        <Button Content="Record Audio" Click="RecordAudio_Click" Margin="872,587,0,0" VerticalAlignment="Top" Width="139" Background="#428bca"/>
+        <CaptureElement x:Name="previewControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
         <Border HorizontalAlignment="Left" Margin="209,173,0,0" VerticalAlignment="Top" BorderBrush="Black" BorderThickness="1">
             <Image x:Name="imageControl" Stretch="Uniform" Height="389" Width="634" FocusVisualPrimaryBrush="{x:Null}"/>
         </Border>
@@ -32,25 +38,8 @@
         <Button x:Name="mirrorImageButton" Content="Mirror" Click="MirrorImage_Click" Style="{StaticResource ButtonStyle}" Margin="1041,234,0,0" VerticalAlignment="Top" Width="139"/>
         <Button x:Name="thresholdFilterButton" Content="Threshold" Click="ThresholdFilter_Click" Style="{StaticResource ButtonStyle}" Margin="872,287,0,0" VerticalAlignment="Top" Width="139"/>
         <Button x:Name="posterizeButton" Content="Posterize" Click="Posterize_Click" Style="{StaticResource ButtonStyle}" Margin="1041,287,0,0" VerticalAlignment="Top" Width="139"/>
-        <Slider x:Name="contrastSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="ContrastSlider_ValueChanged" Header="Contrast" HorizontalAlignment="Left" Margin="872,353,0,0" VerticalAlignment="Top" Width="303" RenderTransformOrigin="0.06,0.093"/>
+        <Slider x:Name="contrastSlider" Minimum="-100" Maximum="100"  Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="ContrastSlider_ValueChanged" Header="Contrast" HorizontalAlignment="Left" Margin="872,353,0,0" VerticalAlignment="Top" Width="303" RenderTransformOrigin="0.06,0.093"/>
         <Slider x:Name="brightnessSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="BrightnessSlider_ValueChanged" Header="Brightness" HorizontalAlignment="Left" Margin="872,433,0,0" VerticalAlignment="Top" Width="303" RenderTransformOrigin="0.06,0.093"/>
         <Slider x:Name="saturationSlider" Minimum="-50" Maximum="50" Value="0" TickFrequency="5" SmallChange="1" LargeChange="10" ValueChanged="SaturationSlider_ValueChanged" Header="Saturation" HorizontalAlignment="Left" Margin="872,507,0,0" VerticalAlignment="Top" Width="303" RenderTransformOrigin="0.06,0.093"/>
-
-        <!-- <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            
-            <Image x:Name="imageControl" Stretch="Uniform" Height="500"/>
-            <Button Content="Load Image" Click="LoadImage_Click"/>
-            <Button Content="Save" Click="SaveImage_Click"/>
-            <Button x:Name="grayscaleButton" Content="Apply Grayscale Filter" Click="ApplyGrayscaleFilter_Click" Style="{StaticResource ButtonStyle}"/>
-            <Button x:Name="invertColorsButton" Content="Invert Colors" Click="InvertColors_Click" Style="{StaticResource ButtonStyle}"/>
-            <Button x:Name="applySepiaToneButton" Content="Apply Sepia Tone" Click="ApplySepiaTone_Click" Style="{StaticResource ButtonStyle}"/>
-            <Button x:Name="mirrorImageButton" Content="Mirror Image" Click="MirrorImage_Click" Style="{StaticResource ButtonStyle}"/>
-            <Button x:Name="thresholdFilterButton" Content="Threshold Filter" Click="ThresholdFilter_Click" Style="{StaticResource ButtonStyle}"/>
-            <Button x:Name="posterizeButton" Content="Posterize" Click="Posterize_Click" Style="{StaticResource ButtonStyle}"/>
-            <Slider x:Name="contrastSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="ContrastSlider_ValueChanged" Header="Contrast Adjustment" />
-            <Slider x:Name="brightnessSlider" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" SmallChange="1" LargeChange="10" ValueChanged="BrightnessSlider_ValueChanged" Header="Brightness Adjustment"/>
-            <Slider x:Name="saturationSlider" Minimum="-50" Maximum="50" Value="0" TickFrequency="5" SmallChange="1" LargeChange="10" ValueChanged="SaturationSlider_ValueChanged" Header="Simple Saturation Adjustment"/>
-
-        </StackPanel> -->
     </Grid>
 </Page>

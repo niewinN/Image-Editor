@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>52A8FFC32311C0BF2A2FD33241A386D1128B2F4B42AF24E179EF1C76AD9F6EF8</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>21596A7ED399E05B62244B4CD1825C33612778AB1D8A52E57A6F472CAAF17B25</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>91a06e55-efa4-4220-ae04-b31c009a23d9_1.0.0.0_x86__60jzptcn15482</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>91a06e55-efa4-4220-ae04-b31c009a23d9_60jzptcn15482!App</RegisteredUserModeAppID>
     <RegisteredPackageID>91a06e55-efa4-4220-ae04-b31c009a23d9</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-04-06T02:11:21.931</Modified>
+      <Modified>2024-05-04T12:48:12.501</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\ImageEditor.exe">
       <PackagePath>entrypoint\ImageEditor.exe</PackagePath>
-      <Modified>2024-04-06T02:11:21.396</Modified>
+      <Modified>2024-05-04T12:48:11.987</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.14\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -94,15 +94,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\ImageEditor.xr.xml">
       <PackagePath>ImageEditor.xr.xml</PackagePath>
-      <Modified>2024-04-06T02:11:21.310</Modified>
+      <Modified>2024-05-04T10:55:33.910</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2024-04-06T02:11:21.316</Modified>
+      <Modified>2024-05-04T12:48:11.900</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2024-04-06T02:11:21.316</Modified>
+      <Modified>2024-05-04T12:48:11.900</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -110,11 +110,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-04-04T23:56:38.767</Modified>
+      <Modified>2024-05-04T10:13:04.195</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\piotr\source\repos\ImageEditor\ImageEditor\bin\x86\Debug\Core\ImageEditor.exe">
       <PackagePath>ImageEditor.exe</PackagePath>
-      <Modified>2024-04-06T02:11:21.929</Modified>
+      <Modified>2024-05-04T12:48:12.501</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
