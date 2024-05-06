@@ -40,15 +40,11 @@ namespace ImageEditor
             StorageFile photo = await cameraCaptureUI.CaptureFileAsync(Windows.Media.Capture.CameraCaptureUIMode.Photo);
             if (photo != null)
             {
-                // Zapisz zdjęcie do lokalizacji lokalnej aplikacji
                 StorageFolder localFolder = ApplicationData.Current.LocalFolder;
                 StorageFile savedFile = await photo.CopyAsync(localFolder, photo.Name, NameCollisionOption.GenerateUniqueName);
-               
-                
             }
             else
             {
-                // Informacja, jeśli zdjęcie nie zostało zrobione
                 MessageDialog messageDialog = new MessageDialog("Nie udało się zrobić zdjęcia.", "Błąd");
                 await messageDialog.ShowAsync();
             }
@@ -62,7 +58,6 @@ namespace ImageEditor
                 StreamingCaptureMode = StreamingCaptureMode.AudioAndVideo
             });
 
-            // Utwórz tymczasowy plik w folderze tymczasowym
             var tempFile = await ApplicationData.Current.TemporaryFolder.CreateFileAsync("tempVideo.mp4", CreationCollisionOption.GenerateUniqueName);
             await mediaCapture.StartRecordToStorageFileAsync(MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto), tempFile);
 
@@ -71,7 +66,6 @@ namespace ImageEditor
 
             await mediaCapture.StopRecordAsync();
 
-            // Po zatrzymaniu nagrywania, zapytaj użytkownika, gdzie chce zapisać plik
             var savePicker = new Windows.Storage.Pickers.FileSavePicker
             {
                 SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.VideosLibrary
@@ -86,10 +80,9 @@ namespace ImageEditor
             }
             else
             {
-                await tempFile.DeleteAsync(); // Usuń tymczasowy plik, jeśli użytkownik anuluje zapis
+                await tempFile.DeleteAsync(); 
             }
         }
-
 
         private async void RecordAudio_Click(object sender, RoutedEventArgs e)
         {
@@ -122,14 +115,9 @@ namespace ImageEditor
             }
             else
             {
-                await tempFile.DeleteAsync(); // Usuń tymczasowy plik, jeśli użytkownik anuluje zapis
+                await tempFile.DeleteAsync();
             }
         }
-
-
-
-
-
 
         private async void LoadImage_Click(object sender, RoutedEventArgs e)
         {
@@ -159,7 +147,7 @@ namespace ImageEditor
 
        private void ToggleFilter(Button button, Action<WriteableBitmap> applyFilterAction)
 {
-    // Deselect previously selected button
+    
     if (currentFilterButton != null && currentFilterButton != button)
     {
         currentFilterButton.Tag = false;
@@ -188,7 +176,6 @@ namespace ImageEditor
 }
 
 
-
         private void ApplyGrayscaleFilter_Click(object sender, RoutedEventArgs e)
         {
             ToggleFilter(grayscaleButton, modifiedImage =>
@@ -203,9 +190,9 @@ namespace ImageEditor
 
                         byte gray = (byte)(.299 * r + .587 * g + .114 * b);
 
-                        pixels[i] = gray; // Blue
-                        pixels[i + 1] = gray; // Green
-                        pixels[i + 2] = gray; // Red
+                        pixels[i] = gray; 
+                        pixels[i + 1] = gray;
+                        pixels[i + 2] = gray;
                     }
                 }, modifiedImage);
             });
@@ -220,9 +207,9 @@ namespace ImageEditor
                 {
                     for (int i = 0; i < pixels.Length; i += 4)
                     {
-                        pixels[i] = (byte)(255 - pixels[i]);       // B
-                        pixels[i + 1] = (byte)(255 - pixels[i + 1]); // G
-                        pixels[i + 2] = (byte)(255 - pixels[i + 2]); // R
+                        pixels[i] = (byte)(255 - pixels[i]);       
+                        pixels[i + 1] = (byte)(255 - pixels[i + 1]); 
+                        pixels[i + 2] = (byte)(255 - pixels[i + 2]); 
                     }
                 }, modifiedImage);
             });
@@ -247,7 +234,6 @@ namespace ImageEditor
                 }, modifiedImage);
             });
         }
-
 
         private void ContrastSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
@@ -306,7 +292,7 @@ namespace ImageEditor
                 WriteableBitmap modifiedImage = new WriteableBitmap(originalImage.PixelWidth, originalImage.PixelHeight);
                 ProcessImage((pixels) =>
                 {
-                    float saturationValue = (float)saturationSlider.Value / 50.0f; // Zakres od -1 do 1
+                    float saturationValue = (float)saturationSlider.Value / 50.0f; 
                     for (int i = 0; i < pixels.Length; i += 4)
                     {
                         byte b = pixels[i];
@@ -314,9 +300,9 @@ namespace ImageEditor
                         byte r = pixels[i + 2];
 
                         float gray = 0.299f * r + 0.587f * g + 0.114f * b;
-                        pixels[i] = (byte)Math.Clamp(b + (b - gray) * saturationValue, 0, 255); // Blue
-                        pixels[i + 1] = (byte)Math.Clamp(g + (g - gray) * saturationValue, 0, 255); // Green
-                        pixels[i + 2] = (byte)Math.Clamp(r + (r - gray) * saturationValue, 0, 255); // Red
+                        pixels[i] = (byte)Math.Clamp(b + (b - gray) * saturationValue, 0, 255); 
+                        pixels[i + 1] = (byte)Math.Clamp(g + (g - gray) * saturationValue, 0, 255); 
+                        pixels[i + 2] = (byte)Math.Clamp(r + (r - gray) * saturationValue, 0, 255); 
                     }
                 }, modifiedImage);
             }
@@ -355,15 +341,13 @@ namespace ImageEditor
             });
         }
 
-
-
         private void ThresholdFilter_Click(object sender, RoutedEventArgs e)
         {
             ToggleFilter(thresholdFilterButton, modifiedImage =>
             {
                 ProcessImage(pixels =>
                 {
-                    byte threshold = 128; // Można dostosować
+                    byte threshold = 128;
                     for (int i = 0; i < pixels.Length; i += 4)
                     {
                         byte gray = (byte)(0.299 * pixels[i + 2] + 0.587 * pixels[i + 1] + 0.114 * pixels[i]);
@@ -382,7 +366,7 @@ namespace ImageEditor
             {
                 ProcessImage(pixels =>
                 {
-                    int levels = 5; // Można dostosować
+                    int levels = 5; 
                     int factor = 255 / (levels - 1);
                     for (int i = 0; i < pixels.Length; i += 4)
                     {
@@ -434,18 +418,7 @@ namespace ImageEditor
                     await encoder.FlushAsync();
                 }
             }
-        }
-
-        
-
-
-
-
-
-
-
-
-
+        }     
 
         private void ProcessImage(Action<byte[]> pixelProcessor, WriteableBitmap bitmapToProcess)
         {
